@@ -1,64 +1,27 @@
-Example plain HTML site using GitLab Pages.
+This is a GnuRadio SDR project to fully build a RX and TX stack for Meshtastic.
 
-Learn more about GitLab Pages at https://pages.gitlab.io and the official
-documentation https://docs.gitlab.com/ce/user/project/pages/.
+Now, why would I do this??
 
----
+An SDR can decode all the presets at the same time. Real hardware can only decode the preset in which its set to.
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+An SDR, depending on the amount of bandwidth captured, can decode up to all of 900MHz ISM spectrum for all LoRa channels. We only need to throw CPU at the problem.
 
-- [GitLab CI](#gitlab-ci)
-- [GitLab User or Group Pages](#gitlab-user-or-group-pages)
-- [Did you fork this project?](#did-you-fork-this-project)
-- [Troubleshooting](#troubleshooting)
+We can now RX LoRa on non-standard frequencies, like Amateur radio bands with superb propagation. Think 6M or 10M .This also depends on getting the TX flow done. Meshtastic presets do have 250KHz, 125KHz, and 62.5KHz - so this does make LoRa usable for lower bands!
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+Dependency: https://github.com/tapparelj/gr-lora_sdr
 
-## GitLab CI
 
-This project's static Pages are built by [GitLab CI][ci], following the steps
-defined in [`.gitlab-ci.yml`](.gitlab-ci.yml):
+![](public/US_all_preset_capture.png)
 
-```
-image: busybox
 
-pages:
-  stage: deploy
-  script:
-  - echo 'Nothing to do...'
-  artifacts:
-    paths:
-    - public
-    expire_in: 1 day
-  rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
-```
 
-The above example expects to put all your HTML files in the `public/` directory.
+1. Download and install https://github.com/tapparelj/gr-lora_sdr
+2. To install, clone the repo to your area of choosing. 
+3. Inside there is a "gnuradio scrips/RX" directory with 8 files. Some are US and others are EU. 
+4. Open the 250KHz respective to your area
+5. Change the Source block to the hardware you have. This may be a RTL-SDR, HackRF, USRP, LimeSDR. You might have to install the driver if it's custom hardware.
+5. Check for errors. Once good, run the script! You'll see data in console as its being evaluated.
+6. To get data OUT of GnuRadio, connect to the respective TCP ports from 20000-20007 for the specific Preset type.
+7. You can take this in whatever program you wish, but I provide a very rough Node-Red flow to parse a part of the data.
 
-## GitLab User or Group Pages
-
-To use this project as your user/group website, you will need one additional
-step: just rename your project to `namespace.gitlab.io`, where `namespace` is
-your `username` or `groupname`. This can be done by navigating to your
-project's **Settings**.
-
-Read more about [user/group Pages][userpages] and [project Pages][projpages].
-
-## Did you fork this project?
-
-If you forked this project for your own use, please go to your project's
-**Settings** and remove the forking relationship, which won't be necessary
-unless you want to contribute back to the upstream project.
-
-## Troubleshooting
-
-1. CSS is missing! That means that you have wrongly set up the CSS URL in your
-   HTML files. Have a look at the [index.html] for an example.
-
-[ci]: https://about.gitlab.com/gitlab-ci/
-[index.html]: https://gitlab.com/pages/plain-html/blob/master/public/index.html
-[userpages]: https://docs.gitlab.com/ce/user/project/pages/introduction.html#user-or-group-pages
-[projpages]: https://docs.gitlab.com/ce/user/project/pages/introduction.html#project-pages
+![](public/nodered_data_capture.png)
