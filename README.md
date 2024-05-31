@@ -10,6 +10,7 @@ We can now RX LoRa on non-standard frequencies, like Amateur radio bands with su
 
 Dependency: https://github.com/tapparelj/gr-lora_sdr
 
+Note: Meshtastic is a trademark by these fine folks! https://meshtastic.org . We wouldn't be doing SDR shenanigans without'em!
 
 ![](public/US_all_preset_capture.png)
 
