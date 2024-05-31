@@ -1,0 +1,16 @@
+{
+  "global": {
+    "core:version": "1.0.0",
+    "core:datatype": "cf32_le",
+    "core:description": "LoRa Example",
+    "core:sample_rate": 1000000,
+    "core:author": "crankylinuxuser"
+  },
+  "captures": [
+    {
+      "core:sample_start": 0,
+      "core:frequency": 906875000
+    }
+  ],
+  "annotations": []
+}
