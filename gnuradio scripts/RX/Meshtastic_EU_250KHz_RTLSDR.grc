@@ -299,7 +299,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    center_freq: center_250KHz
+    center_freq: '0'
     comment: 'Set Minoutbuf = 17000
 
       Frame Sync needs that'
