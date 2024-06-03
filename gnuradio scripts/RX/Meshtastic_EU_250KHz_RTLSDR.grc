@@ -178,101 +178,6 @@ blocks:
     coordinate: [880, 8.0]
     rotation: 0
     state: enabled
-- name: blocks_tag_gate_0
-  id: blocks_tag_gate
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    propagate_tags: 'False'
-    single_key: '""'
-    type: byte
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1512, 288.0]
-    rotation: 0
-    state: enabled
-- name: blocks_tag_gate_0_0
-  id: blocks_tag_gate
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    propagate_tags: 'False'
-    single_key: '""'
-    type: byte
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1512, 488.0]
-    rotation: 0
-    state: enabled
-- name: blocks_tag_gate_0_1
-  id: blocks_tag_gate
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    propagate_tags: 'False'
-    single_key: '""'
-    type: byte
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1512, 688.0]
-    rotation: 0
-    state: enabled
-- name: blocks_tag_gate_0_2
-  id: blocks_tag_gate
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    propagate_tags: 'False'
-    single_key: '""'
-    type: byte
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1512, 880.0]
-    rotation: 0
-    state: enabled
-- name: blocks_tag_gate_0_2_0
-  id: blocks_tag_gate
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    propagate_tags: 'False'
-    single_key: '""'
-    type: byte
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1512, 1072.0]
-    rotation: 0
-    state: enabled
 - name: blocks_throttle2_0
   id: blocks_throttle2
   parameters:
@@ -1044,96 +949,6 @@ blocks:
     coordinate: [968, 1096.0]
     rotation: 0
     state: enabled
-- name: network_tcp_sink_0
-  id: network_tcp_sink
-  parameters:
-    addr: 0.0.0.0
-    affinity: ''
-    alias: ''
-    comment: ShortFast
-    mode: '2'
-    port: '20000'
-    type: byte
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1680, 288.0]
-    rotation: 0
-    state: enabled
-- name: network_tcp_sink_0_0
-  id: network_tcp_sink
-  parameters:
-    addr: 0.0.0.0
-    affinity: ''
-    alias: ''
-    comment: ShortSlow
-    mode: '2'
-    port: '20001'
-    type: byte
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1680, 488.0]
-    rotation: 0
-    state: enabled
-- name: network_tcp_sink_0_1
-  id: network_tcp_sink
-  parameters:
-    addr: 0.0.0.0
-    affinity: ''
-    alias: ''
-    comment: MediumFast
-    mode: '2'
-    port: '20002'
-    type: byte
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1680, 688.0]
-    rotation: 0
-    state: enabled
-- name: network_tcp_sink_0_2
-  id: network_tcp_sink
-  parameters:
-    addr: 0.0.0.0
-    affinity: ''
-    alias: ''
-    comment: MediumSlow
-    mode: '2'
-    port: '20003'
-    type: byte
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1680, 880.0]
-    rotation: 0
-    state: enabled
-- name: network_tcp_sink_0_2_0
-  id: network_tcp_sink
-  parameters:
-    addr: 0.0.0.0
-    affinity: ''
-    alias: ''
-    comment: LongFast
-    mode: '2'
-    port: '20004'
-    type: byte
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1680, 1072.0]
-    rotation: 0
-    state: enabled
 - name: note_0_0_0
   id: note
   parameters:
@@ -1506,24 +1321,129 @@ blocks:
     coordinate: [72, 508.0]
     rotation: 0
     state: enabled
+- name: zeromq_pub_sink_0_0_2
+  id: zeromq_pub_sink
+  parameters:
+    address: tcp://0.0.0.0:20000
+    affinity: ''
+    alias: ''
+    bind: 'True'
+    comment: ShortFast
+    drop_on_hwm: 'True'
+    hwm: '-1'
+    key: ''
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1512, 264.0]
+    rotation: 0
+    state: enabled
+- name: zeromq_pub_sink_0_0_2_0
+  id: zeromq_pub_sink
+  parameters:
+    address: tcp://0.0.0.0:20001
+    affinity: ''
+    alias: ''
+    bind: 'True'
+    comment: ShortSlow
+    drop_on_hwm: 'True'
+    hwm: '-1'
+    key: ''
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1512, 464.0]
+    rotation: 0
+    state: enabled
+- name: zeromq_pub_sink_0_0_2_1
+  id: zeromq_pub_sink
+  parameters:
+    address: tcp://0.0.0.0:20002
+    affinity: ''
+    alias: ''
+    bind: 'True'
+    comment: MediumFast
+    drop_on_hwm: 'True'
+    hwm: '-1'
+    key: ''
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1512, 664.0]
+    rotation: 0
+    state: enabled
+- name: zeromq_pub_sink_0_0_2_2
+  id: zeromq_pub_sink
+  parameters:
+    address: tcp://0.0.0.0:20003
+    affinity: ''
+    alias: ''
+    bind: 'True'
+    comment: MediumSlow
+    drop_on_hwm: 'True'
+    hwm: '-1'
+    key: ''
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1512, 856.0]
+    rotation: 0
+    state: enabled
+- name: zeromq_pub_sink_0_0_2_3
+  id: zeromq_pub_sink
+  parameters:
+    address: tcp://0.0.0.0:20004
+    affinity: ''
+    alias: ''
+    bind: 'True'
+    comment: LongFast
+    drop_on_hwm: 'True'
+    hwm: '-1'
+    key: ''
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1512, 1048.0]
+    rotation: 0
+    state: enabled
 
 connections:
-- [blocks_tag_gate_0, '0', network_tcp_sink_0, '0']
-- [blocks_tag_gate_0_0, '0', network_tcp_sink_0_0, '0']
-- [blocks_tag_gate_0_1, '0', network_tcp_sink_0_1, '0']
-- [blocks_tag_gate_0_2, '0', network_tcp_sink_0_2, '0']
-- [blocks_tag_gate_0_2_0, '0', network_tcp_sink_0_2_0, '0']
 - [blocks_throttle2_0, '0', freq_xlating_fir_filter_xxx_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', lora_sdr_frame_sync_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', lora_sdr_frame_sync_0_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', lora_sdr_frame_sync_0_1, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', lora_sdr_frame_sync_0_2, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', lora_sdr_frame_sync_0_2_0, '0']
-- [lora_sdr_crc_verif_0, '0', blocks_tag_gate_0, '0']
-- [lora_sdr_crc_verif_0_0, '0', blocks_tag_gate_0_0, '0']
-- [lora_sdr_crc_verif_0_1, '0', blocks_tag_gate_0_1, '0']
-- [lora_sdr_crc_verif_0_2, '0', blocks_tag_gate_0_2, '0']
-- [lora_sdr_crc_verif_0_2_0, '0', blocks_tag_gate_0_2_0, '0']
+- [lora_sdr_crc_verif_0, '0', zeromq_pub_sink_0_0_2, '0']
+- [lora_sdr_crc_verif_0_0, '0', zeromq_pub_sink_0_0_2_0, '0']
+- [lora_sdr_crc_verif_0_1, '0', zeromq_pub_sink_0_0_2_1, '0']
+- [lora_sdr_crc_verif_0_2, '0', zeromq_pub_sink_0_0_2_2, '0']
+- [lora_sdr_crc_verif_0_2_0, '0', zeromq_pub_sink_0_0_2_3, '0']
 - [lora_sdr_deinterleaver_0, '0', lora_sdr_hamming_dec_0, '0']
 - [lora_sdr_deinterleaver_0_0, '0', lora_sdr_hamming_dec_0_0, '0']
 - [lora_sdr_deinterleaver_0_1, '0', lora_sdr_hamming_dec_0_1, '0']

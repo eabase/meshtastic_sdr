@@ -178,25 +178,6 @@ blocks:
     coordinate: [864, 8.0]
     rotation: 0
     state: enabled
-- name: blocks_tag_gate_0_4_0
-  id: blocks_tag_gate
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    propagate_tags: 'False'
-    single_key: '""'
-    type: byte
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1464, 456.0]
-    rotation: 0
-    state: enabled
 - name: blocks_throttle2_0
   id: blocks_throttle2
   parameters:
@@ -394,24 +375,6 @@ blocks:
     bus_source: false
     bus_structure: null
     coordinate: [920, 480.0]
-    rotation: 0
-    state: enabled
-- name: network_tcp_sink_0_4_0
-  id: network_tcp_sink
-  parameters:
-    addr: 0.0.0.0
-    affinity: ''
-    alias: ''
-    comment: VeryLongSlow
-    mode: '2'
-    port: '20007'
-    type: byte
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1632, 456.0]
     rotation: 0
     state: enabled
 - name: note_0_0_0
@@ -786,12 +749,33 @@ blocks:
     coordinate: [64, 276.0]
     rotation: 0
     state: enabled
+- name: zeromq_pub_sink_0_0_2
+  id: zeromq_pub_sink
+  parameters:
+    address: tcp://0.0.0.0:20007
+    affinity: ''
+    alias: ''
+    bind: 'True'
+    comment: VeryLongSlow
+    drop_on_hwm: 'True'
+    hwm: '-1'
+    key: ''
+    pass_tags: 'False'
+    timeout: '100'
+    type: byte
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1464, 432.0]
+    rotation: 0
+    state: enabled
 
 connections:
-- [blocks_tag_gate_0_4_0, '0', network_tcp_sink_0_4_0, '0']
 - [blocks_throttle2_0, '0', freq_xlating_fir_filter_xxx_0_0_0, '0']
 - [freq_xlating_fir_filter_xxx_0_0_0, '0', lora_sdr_frame_sync_0_4_0, '0']
-- [lora_sdr_crc_verif_0_4_0, '0', blocks_tag_gate_0_4_0, '0']
+- [lora_sdr_crc_verif_0_4_0, '0', zeromq_pub_sink_0_0_2, '0']
 - [lora_sdr_deinterleaver_0_4_0, '0', lora_sdr_hamming_dec_0_4_0, '0']
 - [lora_sdr_dewhitening_0_4_0, '0', lora_sdr_crc_verif_0_4_0, '0']
 - [lora_sdr_fft_demod_0_4_0, '0', lora_sdr_gray_mapping_0_4_0, '0']
