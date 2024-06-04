@@ -10,7 +10,9 @@ To run:
 6. Run the flow in GnuRadio. NOTE: the flows emit data AS A server to TCP ports. Looking at the block "ZMQ PUB Sink" you can see the ports are from 20000-20007. 
 7. Run the python3 program with "python3 meshtastic_gnuradio_decoder.py -n <SERVER> -p <PORT>"
 
-The program also accepts individual packets of data with "python3 meshtastic_gnuradio_decoder.py -i <data>" and an optional -k AES key override
+The program also accepts individual packets of data with "python3 meshtastic_gnuradio_decoder.py -i <data>" 
+
+The program also supports an optional AES key override. If you don't provide it, it uses the default 'AQ==' key.
 
 Note that the ports are set as:
 Shortfast TCP/20000
@@ -36,6 +38,3 @@ Dependency: https://github.com/tapparelj/gr-lora_sdr
 Note: Meshtastic is a trademark by these fine folks! https://meshtastic.org . We wouldn't be doing SDR shenanigans without'em!
 
 ![](public/US_all_preset_capture.png)
-
-
-![](public/nodered_data_capture.png)
