@@ -11,7 +11,7 @@ import socket
 import zmq
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
-
+from meshtastic import protocols, mesh_pb2
 
 # SDR output example data: ffffffffb45463dab971aa8c6308000078aacf76587a5a4cf4a20e2c1d0349ab3f72
 # Use default key. Result should be:  b'\x08\x01\x12\x0eTestingCLU1234'
@@ -40,8 +40,6 @@ parser.add_argument('-k', '--key', action='store',dest='key', help='AES key over
 parser.add_argument('-n', '--net', action='store',dest='net', help='Network TCP in ip or DNS. ZeroMQ protocol.')
 parser.add_argument('-p', '--port', action='store',dest='port', help='Network port')
 args = parser.parse_args()
-
-
 
 ##### END PARSE COMMANDLINE INPUT #####
 
@@ -137,6 +135,30 @@ def dataDecryptor(meshPacketHex, aesKey):
 
 ##### END DECRYPTION PROCESS #####
 
+
+
+##### START PROTOBUF DECODER #####
+
+def decodeProtobuf(packetData):
+    # print("Packet data:", packetData)
+    data = mesh_pb2.Data()
+    try:
+        data.ParseFromString(packetData)
+
+        handler = protocols.get(data.portnum)
+        if handler.protobufFactory is None:
+            pass
+        else:
+            pb = handler.protobufFactory()
+            pb.ParseFromString(data.payload)
+    except:
+        data = "INVALID PROTOBUF:"
+    return data
+
+##### END PROTOBUF DECODER #####
+
+
+
 ##### START OPTIONAL NETWORK PROCESS #####
 
 def networkParse(ipAddr, port, aesKey):
@@ -151,14 +173,12 @@ def networkParse(ipAddr, port, aesKey):
             msg = socket.recv() # grab the message
             extractedData = dataExtractor(msg.hex())
             decryptedData = dataDecryptor(extractedData, aesKey)
-            print(decryptedData)
+            # print(decryptedData)
+            print(decodeProtobuf(decryptedData))
         else:
             time.sleep(0.1) # wait 100ms and try again
 
 ##### START OPTIONAL NETWORK PROCESS #####
-
-
-
 
 
 if __name__ == "__main__":
@@ -166,7 +186,6 @@ if __name__ == "__main__":
 
     # Network branch. Doesnt exit, so we need IP Port and AES key
     try:
-        print("do we have ip and port?")
         if len(args.net) > 0 and len(args.port) > 0:
             print(args.net, args.port)
             networkParse(args.net, args.port, meshtasticFullKeyHex)
@@ -174,8 +193,12 @@ if __name__ == "__main__":
         # If we get a payload on commandline, decrypt and exit. 
         meshPacketHex = dataExtractor(args.input)
         decryptedData = dataDecryptor(meshPacketHex, meshtasticFullKeyHex)
-        print(decryptedData)
-
+        protobufMessage = decodeProtobuf(decryptedData)
+        if(protobufMessage == "INVALID PROTOBUF:"):
+            print("INVALID PROTOBUF: ", end = '')
+            print(decryptedData)
+        else:
+            print(protobufMessage)
 
 
 
