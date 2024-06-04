@@ -169,12 +169,20 @@ def networkParse(ipAddr, port, aesKey):
     socket.setsockopt(zmq.SUBSCRIBE, b'') # subscribe to topic of all (needed or else it won't work)
 
     while True:
-        if socket.poll(10) != 0: # check if there is a message on the socket
-            msg = socket.recv() # grab the message
+        if socket.poll(10) != 0:
+            msg = socket.recv()
+            # Extracts data from network socket
             extractedData = dataExtractor(msg.hex())
+            # Decrypts the payload
             decryptedData = dataDecryptor(extractedData, aesKey)
-            # print(decryptedData)
-            print(decodeProtobuf(decryptedData))
+            # Decodes the Protobuf if possible
+            protobufMessage = decodeProtobuf(decryptedData)
+            if(protobufMessage == "INVALID PROTOBUF:"):
+                print("INVALID PROTOBUF: ", end = '')
+                print(decryptedData)
+            else:
+                print(protobufMessage)
+
         else:
             time.sleep(0.1) # wait 100ms and try again
 
