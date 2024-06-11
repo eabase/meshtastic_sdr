@@ -1,0 +1,10 @@
+sys
+os
+time
+argparse
+base64
+socket
+zmq
+cryptography.hazmat.primitives.ciphers
+cryptography.hazmat.backends
+meshtastic
