@@ -45,7 +45,7 @@ blocks:
     samp_rate: samp_rate
     type: complex_band_pass
     value: ''
-    width: lora_250bandwidth/10
+    width: lora_250bandwidth/50
     win: window.WIN_HAMMING
   states:
     bus_sink: false
@@ -66,16 +66,64 @@ blocks:
     coordinate: [312, 8.0]
     rotation: 0
     state: enabled
-- name: cr_5
+- name: cr_44
   id: variable
   parameters:
     comment: ''
-    value: '5'
+    value: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [424, 8.0]
+    coordinate: [440, 8.0]
+    rotation: 0
+    state: enabled
+- name: cr_45
+  id: variable
+  parameters:
+    comment: ''
+    value: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [496, 8.0]
+    rotation: 0
+    state: enabled
+- name: cr_46
+  id: variable
+  parameters:
+    comment: ''
+    value: '2'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [440, 72.0]
+    rotation: 0
+    state: enabled
+- name: cr_47
+  id: variable
+  parameters:
+    comment: ''
+    value: '3'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [496, 72.0]
+    rotation: 0
+    state: enabled
+- name: cr_48
+  id: variable
+  parameters:
+    comment: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [440, 136.0]
     rotation: 0
     state: enabled
 - name: has_crc
@@ -178,27 +226,6 @@ blocks:
     coordinate: [880, 8.0]
     rotation: 0
     state: enabled
-- name: blocks_throttle2_0
-  id: blocks_throttle2
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    ignoretag: 'True'
-    limit: auto
-    maximum: '0.1'
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    samples_per_second: samp_rate
-    type: complex
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [312, 592.0]
-    rotation: 0
-    state: enabled
 - name: freq_xlating_fir_filter_xxx_0
   id: freq_xlating_fir_filter_xxx
   parameters:
@@ -218,7 +245,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [472, 592.0]
+    coordinate: [376, 592.0]
     rotation: 0
     state: enabled
 - name: import_0
@@ -850,7 +877,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    cr: cr_5
+    cr: cr_45
     has_crc: has_crc
     impl_head: impl_head
     ldro: '2'
@@ -871,7 +898,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    cr: cr_5
+    cr: cr_45
     has_crc: has_crc
     impl_head: impl_head
     ldro: '2'
@@ -892,7 +919,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    cr: cr_5
+    cr: cr_45
     has_crc: has_crc
     impl_head: impl_head
     ldro: '2'
@@ -913,7 +940,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    cr: cr_5
+    cr: cr_45
     has_crc: has_crc
     impl_head: impl_head
     ldro: '2'
@@ -934,7 +961,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    cr: cr_5
+    cr: cr_45
     has_crc: has_crc
     impl_head: impl_head
     ldro: '2'
@@ -1318,7 +1345,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [72, 508.0]
+    coordinate: [88, 508.0]
     rotation: 0
     state: enabled
 - name: zeromq_pub_sink_0
@@ -1340,7 +1367,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1512, 1048.0]
+    coordinate: [1528, 1060.0]
     rotation: 0
     state: enabled
 - name: zeromq_pub_sink_0_0
@@ -1362,7 +1389,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1512, 856.0]
+    coordinate: [1528, 868.0]
     rotation: 0
     state: enabled
 - name: zeromq_pub_sink_0_0_0
@@ -1384,7 +1411,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1512, 664.0]
+    coordinate: [1528, 676.0]
     rotation: 0
     state: enabled
 - name: zeromq_pub_sink_0_0_1
@@ -1406,7 +1433,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1512, 464.0]
+    coordinate: [1544, 476.0]
     rotation: 0
     state: enabled
 - name: zeromq_pub_sink_0_0_2
@@ -1428,12 +1455,11 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1504, 264.0]
+    coordinate: [1536, 276.0]
     rotation: 0
     state: enabled
 
 connections:
-- [blocks_throttle2_0, '0', freq_xlating_fir_filter_xxx_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', lora_sdr_frame_sync_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', lora_sdr_frame_sync_0_0, '0']
 - [freq_xlating_fir_filter_xxx_0, '0', lora_sdr_frame_sync_0_1, '0']
@@ -1484,7 +1510,7 @@ connections:
 - [lora_sdr_header_decoder_0_2, frame_info, lora_sdr_frame_sync_0_2, frame_info]
 - [lora_sdr_header_decoder_0_2_0, '0', lora_sdr_dewhitening_0_2_0, '0']
 - [lora_sdr_header_decoder_0_2_0, frame_info, lora_sdr_frame_sync_0_2_0, frame_info]
-- [rtlsdr_source_0, '0', blocks_throttle2_0, '0']
+- [rtlsdr_source_0, '0', freq_xlating_fir_filter_xxx_0, '0']
 
 metadata:
   file_format: 1
