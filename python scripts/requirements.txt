@@ -1,11 +1,2 @@
-sys
-os
-time
-argparse
-base64
-socket
-zmq
-cryptography.hazmat.primitives.ciphers
-cryptography.hazmat.backends
-meshtastic
-pmt
+pyzmq==22.3.0
+meshtastic==2.3.7
