@@ -1,4 +1,4 @@
-# Joint copyright of Josh Conway and discord user:winter_soldier#1984
+# Joint copyright of Josh Conway and discord user:winter_soldier#1984 and AT
 # License is GPL3 (Gnu public license version 3)
 
 
