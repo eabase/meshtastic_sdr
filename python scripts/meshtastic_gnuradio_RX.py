@@ -48,6 +48,7 @@ parser.add_argument('-i', '--input', action='store', dest='input', help='SDR cap
 parser.add_argument('-k', '--key', action='store',dest='key', help='AES key override in Base64')
 parser.add_argument('-n', '--net', action='store',dest='net', help='Network TCP in ip or DNS. ZeroMQ protocol.')
 parser.add_argument('-p', '--port', action='store',dest='port', help='Network port')
+parser.add_argument('-r', '--raw', action='store_true',dest='raw', help='Deactivates all handling and passes Gnuradio data raw')
 parser.add_argument('-d', '--debug', action='store_true',dest='debug', help='Print more debug messages')
 args = parser.parse_args()
 
@@ -265,18 +266,21 @@ def networkParse(ipAddr, port, aesKey):
     while True:
         if socket.poll(10) != 0:
             msg = socket.recv()
-            timeNow = datetime.now()
-            print("Datetime: " + timeNow.strftime("%Y-%m-%d %H:%M:%S"))
-            extractedData = dataExtractor(msg.hex())
-            PacketID  = extractedData['packetID'].hex()
-            if debug:
-                print("Packet: " + msg.hex())
-            decryptedData = dataDecryptor(extractedData, aesKey)
-            protobufMessage = decodeProtobuf(decryptedData, msb2lsb(extractedData['sender'].hex()), msb2lsb(extractedData['dest'].hex()) )
-            if (protobufMessage == "INVALID PROTOBUF: "):
-                print(decryptedData)
+            if args.raw:
+                print(msg)
             else:
-                print(protobufMessage + "\n")
+                timeNow = datetime.now()
+                print("Datetime: " + timeNow.strftime("%Y-%m-%d %H:%M:%S"))
+                extractedData = dataExtractor(msg.hex())
+                PacketID  = extractedData['packetID'].hex()
+                if debug:
+                    print("Packet: " + msg.hex())
+                decryptedData = dataDecryptor(extractedData, aesKey)
+                protobufMessage = decodeProtobuf(decryptedData, msb2lsb(extractedData['sender'].hex()), msb2lsb(extractedData['dest'].hex()) )
+                if (protobufMessage == "INVALID PROTOBUF: "):
+                    print(decryptedData)
+                else:
+                    print(protobufMessage + "\n")
 
         else:
             time.sleep(0.1) # wait 100ms and try again
