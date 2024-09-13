@@ -210,7 +210,7 @@ def decodeProtobuf(packetData, sourceID, destID):
         case 34 : # PAXCOUNTER_APP
             data = "PAXCOUNTER_APP To be implemented"
         case 64 : # SERIAL_APP
-            print(" ")
+            data = "SERIAL_APP To be implemented"
         case 65 : # STORE_FORWARD_APP
             sfwd = mesh_pb2.StoreAndForward()
             sfwd.ParseFromString(data.payload)
