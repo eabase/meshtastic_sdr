@@ -178,7 +178,10 @@ def decodeProtobuf(packetData, sourceID, destID):
             data = "UNKNOWN_APP To be implemented"
         case 1 : # TEXT_MESSAGE_APP
             text_payload = data.payload.decode('utf-8')
-            data = "TEXT_MESSAGE_APP " + str(sourceID) + " -> " + str(destID) + " " + str(text_payload)
+            if(destID == str("ffffffff") ):
+                data = "TEXT_MESSAGE_APP " + str(sourceID) + " -> " + str(destID) + " " + str(text_payload)
+            else:
+                data = "TEXT_MESSAGE_APP " + str(sourceID) + " -> " + str(destID) + " " + "DIRECT MESSAGE CENSORED"
         case 2 : # REMOTE_HARDWARE_APP
             data = "REMOTE_HARDWARE_APP To be implemented"
         case 3 : # POSITION_APP
@@ -189,7 +192,10 @@ def decodeProtobuf(packetData, sourceID, destID):
             data="POSITION_APP " + str(sourceID) + " -> " + str(destID) + " " + str(latitude) +"," + str(longitude)
         case 4 : # NODEINFO_APP
             info = mesh_pb2.User()
-            info.ParseFromString(data.payload)
+            try:
+                info.ParseFromString(data.payload)
+            except:
+                print("Unknown Nodeinfo_app parse error")
             data = "NODEINFO_APP " + str(info)
         case 5 : # ROUTING_APP
             rtng = mesh_pb2.Routing()
@@ -210,7 +216,7 @@ def decodeProtobuf(packetData, sourceID, destID):
         case 34 : # PAXCOUNTER_APP
             data = "PAXCOUNTER_APP To be implemented"
         case 64 : # SERIAL_APP
-            data = "SERIAL_APP To be implemented"
+            print(" ")
         case 65 : # STORE_FORWARD_APP
             sfwd = mesh_pb2.StoreAndForward()
             sfwd.ParseFromString(data.payload)
@@ -299,8 +305,11 @@ if __name__ == "__main__":
             if debug:
                 print(args.net, args.port)
             networkParse(args.net, args.port, meshtasticFullKeyHex)
-    except:
-        # If we get a payload on commandline, decrypt and exit. 
+    except Exception as err:
+        print("Function failed. Reason: " + str(err))
+        # If we get a payload on commandline, decrypt and exit.
+        if debug:
+            print("incoming string:", args.input)
         meshPacketHex = dataExtractor(args.input)
         if debug:
             print(meshPacketHex)
